@@ -8,6 +8,10 @@ const Welcome: React.FC = () => {
     navigate('/signup');
   };
 
+  const handleSignIn = () => {
+    navigate('/signin');
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#5E3EEB] text-white p-4">
       <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-center">Welcome to Revetpay</h1>
@@ -21,7 +25,10 @@ const Welcome: React.FC = () => {
         >
           Sign Up
         </button>
-        <button className="bg-transparent border-2 border-white hover:bg-white hover:text-[#5E3EEB] text-white font-bold py-2 px-6 rounded-full text-lg transition duration-300">
+        <button 
+          onClick={handleSignIn}
+          className="bg-transparent border-2 border-white hover:bg-white hover:text-[#5E3EEB] text-white font-bold py-2 px-6 rounded-full text-lg transition duration-300"
+        >
           Sign In
         </button>
       </div>

@@ -2,8 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Welcome from './components/onboarding/Welcome';
 import SignUp from './components/onboarding/SignUp';
-import './App.css';
+import SignIn from './components/onboarding/SignIn';
 import EmailVerification from './components/onboarding/EmailVerification';
+import './App.css';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/signin" element={<SignIn />} />
           <Route path="/verify-email" element={<EmailVerification />} />
         </Routes>
       </div>

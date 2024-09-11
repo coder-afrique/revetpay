@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import onboardingIllustration from '../../assets/onboarding-illustration.png';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +11,7 @@ const SignUp: React.FC = () => {
     password: '',
     agreeTerms: false,
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -22,7 +25,10 @@ const SignUp: React.FC = () => {
     e.preventDefault();
     console.log('Form submitted:', formData);
     // Here you would typically send the data to your backend
+    navigate('/verify-email');
   };
+
+  const navigate = useNavigate();
 
   return (
     <div className="flex h-screen bg-[#5E3EEB] text-white">
@@ -81,15 +87,24 @@ const SignUp: React.FC = () => {
 
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 text-left">Password</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#5E3EEB] focus:border-[#5E3EEB] text-left"
-                required
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#5E3EEB] focus:border-[#5E3EEB] text-left pr-10"
+                  required
+                />
+                <button
+                  type="button"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <FaEyeSlash className="h-5 w-5 text-gray-500" /> : <FaEye className="h-5 w-5 text-gray-500" />}
+                </button>
+              </div>
             </div>
 
             <div className="flex items-center">
@@ -115,6 +130,9 @@ const SignUp: React.FC = () => {
                 Create Account
               </button>
             </div>
+            <p className="mt-4 text-sm text-center">
+              Already have an account? <span className="text-[#5E3EEB] cursor-pointer">Sign in</span>
+            </p>
           </form>
         </div>
       </div>

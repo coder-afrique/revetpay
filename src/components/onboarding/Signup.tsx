@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import onboardingIllustration from '../../assets/onboarding-illustration.png';
 
 const SignUp: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -25,9 +26,11 @@ const SignUp: React.FC = () => {
 
   return (
     <div className="flex h-screen bg-[#5E3EEB] text-white">
-      {/* Illustration section - hidden on mobile */}
-      <div className="hidden md:flex w-2/5 bg-[#5E3EEB] items-center justify-center">
-        <div className="text-4xl font-bold">Revetpay</div>
+      {/* Illustration section - hidden on mobile, centered on larger screens */}
+      <div className="hidden md:flex w-2/5 bg-[#5E3EEB] items-center justify-start pl-8">
+        <div className="w-4/5 h-4/5 flex items-center justify-center">
+          <img src={onboardingIllustration} alt="Onboarding Illustration" className="max-w-full max-h-full object-contain" />
+        </div>
       </div>
 
       {/* Sign-up form section - full width on mobile */}

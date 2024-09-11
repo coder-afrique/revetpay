@@ -25,7 +25,7 @@ const SignUp: React.FC = () => {
     e.preventDefault();
     console.log('Form submitted:', formData);
     // Here you would typically send the data to your backend
-    navigate('/verify-email');
+    navigate('/dashboard');
   };
 
   const navigate = useNavigate();

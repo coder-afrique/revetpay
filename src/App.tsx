@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Welcome from './components/onboarding/Welcome';
 import SignUp from './components/onboarding/SignUp';

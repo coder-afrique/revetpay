@@ -2,20 +2,14 @@ import React, { useState } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import WithdrawalModal from './WithdrawalModal';
 
-const currencies = [
-  { code: 'USD', symbol: '$', flag: 'https://flagcdn.com/w20/us.png' },
-  { code: 'NGN', symbol: '₦', flag: 'https://flagcdn.com/w20/ng.png' },
-  { code: 'GBP', symbol: '£', flag: 'https://flagcdn.com/w20/gb.png' },
-];
+export interface AccountBalanceProps {
+  currencies: Array<{ code: string; symbol: string; flag: string }>;
+  selectedCurrency: { code: string; symbol: string; flag: string };
+  setSelectedCurrency: React.Dispatch<React.SetStateAction<{ code: string; symbol: string; flag: string }>>;
+  exchangeRates: Record<string, number>;
+}
 
-const exchangeRates = {
-  USD: 1,
-  NGN: 460,
-  GBP: 0.79,
-};
-
-const AccountBalance: React.FC = () => {
-  const [selectedCurrency, setSelectedCurrency] = useState(currencies[0]);
+const AccountBalance: React.FC<AccountBalanceProps> = ({ currencies, selectedCurrency, setSelectedCurrency, exchangeRates }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isWithdrawalModalOpen, setIsWithdrawalModalOpen] = useState(false);
   const baseBalance = 10000; // Base balance in USD

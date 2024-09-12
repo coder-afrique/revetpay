@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { FaUser, FaExchangeAlt, FaMoneyBillWave, FaCog, FaBars, FaTimes } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
 import AccountsNavbar from './AccountsNavbar';
-import { FaHome } from 'react-icons/fa';
 import AccountBalance from './AccountBalance';
 import AssetsList from './AssetsList';
 
@@ -22,7 +20,7 @@ const Dashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState('Accounts');
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState(currencies[0]);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const tabs = [
     { name: 'Accounts', icon: FaUser },

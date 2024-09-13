@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { FaUser, FaExchangeAlt, FaMoneyBillWave, FaCog, FaBars, FaTimes } from 'react-icons/fa';
 import AccountsNavbar from './AccountsNavbar';
+import PayoutNavbar from './PayoutNavbar';  // Add this import
 import AccountBalance from './AccountBalance';
 import AssetsList from './AssetsList';
+import Payout from './Payout';
 
 const currencies = [
   { code: 'USD', symbol: '$', flag: 'https://flagcdn.com/w20/us.png' },
@@ -32,7 +34,7 @@ const Dashboard: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
       {/* Sidebar for desktop */}
-      <div className="hidden md:block">
+      <div className="hidden lg:block">
         <div className={`bg-white shadow-md transition-all duration-300 ${isSidebarCollapsed ? 'w-16' : 'w-64'} h-screen fixed`}>
           <div className="p-4 flex items-center justify-between">
             {!isSidebarCollapsed && <h1 className="text-2xl font-bold text-[#5E3EEB]">Revetpay</h1>}
@@ -64,29 +66,38 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* Main content */}
-      <div className="flex-1 md:ml-64 flex flex-col">
-        <div className="bg-white">
+      <div className="flex-1 lg:ml-64 flex flex-col">
+        <div className="bg-white shadow-sm">
           <div className="container mx-auto px-4 py-4">
-            <AccountsNavbar />
+            {activeTab === 'Accounts' && <AccountsNavbar />}
+            {activeTab === 'Payout' && <PayoutNavbar />}
+            {/* Add other navbars for different tabs */}
           </div>
         </div>
-        <div className="flex-1 p-6 bg-gray-100 overflow-y-auto">
-          <AccountBalance
-            currencies={currencies}
-            selectedCurrency={selectedCurrency}
-            setSelectedCurrency={setSelectedCurrency}
-            exchangeRates={exchangeRates}
-          />
-          <AssetsList
-            selectedCurrency={selectedCurrency}
-            exchangeRates={exchangeRates}
-          />
-          {/* Add other content for each tab here */}
+        <div className="flex-1 p-4 md:p-6 bg-gray-100 overflow-y-auto">
+          {activeTab === 'Accounts' && (
+            <>
+              <AccountBalance
+                currencies={currencies}
+                selectedCurrency={selectedCurrency}
+                setSelectedCurrency={setSelectedCurrency}
+                exchangeRates={exchangeRates}
+              />
+              <div className="mt-6">
+                <AssetsList
+                  selectedCurrency={selectedCurrency}
+                  exchangeRates={exchangeRates}
+                />
+              </div>
+            </>
+          )}
+          {activeTab === 'Payout' && <Payout />}
+          {/* Add other tabs content here */}
         </div>
       </div>
 
       {/* Bottom navigation for mobile */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-md">
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white shadow-md">
         <div className="flex justify-around items-center h-16">
           {tabs.map((tab) => (
             <button
@@ -107,3 +118,4 @@ const Dashboard: React.FC = () => {
 };
 
 export default Dashboard;
+
